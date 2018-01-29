@@ -287,7 +287,6 @@ class IndexTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         ];
         $this->getRequest()->setPostValue($post);
         $this->getRequest()->setParam('id', 1);
-        $this->_urlBuilder->turnOffSecretKey();
         $this->dispatch('backend/customer/index/save');
 
         /** Check that success message is set */
@@ -325,7 +324,6 @@ class IndexTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         $subscriber->loadByCustomerId($customerId);
         $this->assertNotEmpty($subscriber->getId());
         $this->assertEquals(1, $subscriber->getStatus());
-
         $this->assertRedirect($this->stringStartsWith($this->_baseControllerUrl . 'index/'));
     }
 
@@ -355,7 +353,6 @@ class IndexTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         ];
         $this->getRequest()->setPostValue($post);
         $this->getRequest()->setParam('id', 1);
-        $this->_urlBuilder->turnOffSecretKey();
         $this->dispatch('backend/customer/index/save');
 
         /** @var \Magento\Newsletter\Model\Subscriber $subscriber */
@@ -397,23 +394,22 @@ class IndexTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         $this->addEmailMockToClass($transportBuilderMock, EmailNotification::class);
         $post = [
             'customer' => ['entity_id' => $customerId,
-                'middlename' => 'test middlename',
-                'group_id' => 1,
-                'website_id' => 1,
-                'firstname' => 'test firstname',
-                'lastname' => 'test lastname',
-                'email' => $newEmail,
-                'new_password' => 'auto',
-                'sendemail_store_id' => '1',
-                'sendemail' => '1',
-                'created_at' => '2000-01-01 00:00:00',
-                'default_shipping' => '_item1',
-                'default_billing' => 1,
+                           'middlename' => 'test middlename',
+                           'group_id' => 1,
+                           'website_id' => 1,
+                           'firstname' => 'test firstname',
+                           'lastname' => 'test lastname',
+                           'email' => $newEmail,
+                           'new_password' => 'auto',
+                           'sendemail_store_id' => '1',
+                           'sendemail' => '1',
+                           'created_at' => '2000-01-01 00:00:00',
+                           'default_shipping' => '_item1',
+                           'default_billing' => 1,
             ]
         ];
         $this->getRequest()->setPostValue($post);
         $this->getRequest()->setParam('id', 1);
-        $this->_urlBuilder->turnOffSecretKey();
         $this->dispatch('backend/customer/index/save');
 
         /**
@@ -483,7 +479,6 @@ class IndexTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
             ],
         ];
         $this->getRequest()->setPostValue($post);
-        $this->_urlBuilder->turnOffSecretKey();
         $this->dispatch('backend/customer/index/save');
         /*
          * Check that error message is set
