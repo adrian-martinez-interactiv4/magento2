@@ -127,23 +127,7 @@ class Form extends Block
      */
     private function getTabUrl($tabName)
     {
-        $tabIndex = 'index/section/' . $tabName;
-        if (strpos($this->baseUrl, $tabIndex) !== false) {
-            return $this->baseUrl;
-        }
-        if (strpos($this->baseUrl, '/key/') !== false) {
-            /*
-             * Slashes are concatenated to cover case when string 'index' presented in domain name
-             * or somewhere else in url additionally.
-             */
-            $tabUrl =  str_replace('/index/', '/' . $tabIndex . '/', $this->baseUrl);
-        } elseif (strpos($this->baseUrl, '/edit/') !== false) {
-            $tabUrl =  str_replace('/edit/', '/' . $tabIndex . '/', $this->baseUrl);
-        } else {
-            $tabUrl = $this->baseUrl . $tabIndex;
-        }
-
-        return $tabUrl;
+        return str_replace(['/index/', '/edit/'], '/', $this->baseUrl) . 'edit/section/' . $tabName;
     }
 
     /**
