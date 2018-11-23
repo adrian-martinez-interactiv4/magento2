@@ -77,6 +77,10 @@ class FormatTest extends \PHPUnit\Framework\TestCase
             ->method('getCurrentCurrency')
             ->willReturn($this->currency);
 
+        $this->currency->expects($this->once())
+            ->method('getCode')
+            ->willReturn('USD');
+
         $result = $this->formatModel->getPriceFormat($localeCode);
         $intersection = array_intersect_assoc($result, $expectedResult);
         $this->assertCount(count($expectedResult), $intersection);
@@ -91,7 +95,7 @@ class FormatTest extends \PHPUnit\Framework\TestCase
         return [
             ['en_US', ['decimalSymbol' => '.', 'groupSymbol' => ',']],
             ['de_DE', ['decimalSymbol' => ',', 'groupSymbol' => '.']],
-            ['de_CH', ['decimalSymbol' => '.', 'groupSymbol' => '\'']],
+            ['de_CH', ['decimalSymbol' => '.', 'groupSymbol' => '’']],
             ['uk_UA', ['decimalSymbol' => ',', 'groupSymbol' => ' ']]
         ];
     }
